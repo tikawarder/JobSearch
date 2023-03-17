@@ -16,4 +16,13 @@ public class Position {
     private long id;
     private String description;
     private String location;
+
+    public Position(long id, String description, String location) {
+        this.id = id;
+        this.description = description;
+        this.location = location;
+    }
+
+    public Position() {
+    }
 }
