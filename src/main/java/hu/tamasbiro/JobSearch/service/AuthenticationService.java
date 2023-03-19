@@ -6,15 +6,15 @@ import java.util.UUID;
 
 @Service
 public class AuthenticationService {
-
     private Client loggedInClient;
+    private String uuid = "empty";
 
     public Client getLoggedInClient() {
         return loggedInClient;
     }
 
-    public boolean checkUUID(){
-        return this.loggedInClient.getId() != null;
+    public boolean checkUUID(String uuid){
+        return this.uuid.equals(uuid);
     }
 
     public String login(String username, String email) {
@@ -25,6 +25,7 @@ public class AuthenticationService {
                 .name(username)
                 .email(email)
                 .build();
+        this.uuid = uuid;
         return uuid;
     }
 }

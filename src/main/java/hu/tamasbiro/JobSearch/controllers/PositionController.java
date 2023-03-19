@@ -4,14 +4,12 @@ import hu.tamasbiro.JobSearch.domains.Position;
 import hu.tamasbiro.JobSearch.domains.Request;
 import hu.tamasbiro.JobSearch.repository.PositionRepository;
 import hu.tamasbiro.JobSearch.service.AuthenticationService;
+import hu.tamasbiro.JobSearch.service.PositionSearchService;
+import hu.tamasbiro.JobSearch.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,9 +18,11 @@ public class PositionController {
     @Autowired
     PositionRepository repository;
     @Autowired
-    EntityLinks entityLinks;
-    @Autowired
     AuthenticationService authService;
+    @Autowired
+    UrlService urlService;
+    @Autowired
+    PositionSearchService searchService;
 
     @GetMapping("/id/{idOfPosition}")
     public ResponseEntity<Position> getPositionById (@PathVariable(name="idOfPosition") long id){
@@ -30,22 +30,20 @@ public class PositionController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<String>> getURLsBySearch(@RequestParam String positionKeyWord, @RequestParam String locationKeyWord){
-        List<String> urlList = new ArrayList<>();
-        urlList.add("www.google.com"); //toDO call service to add urls
-        return ResponseEntity.ok(urlList);
+    public ResponseEntity<List<Position>> getURLsBySearch(@RequestParam String positionKeyWord, @RequestParam String locationKeyWord){
+        return ResponseEntity.ok(searchService.searchPositions(positionKeyWord, locationKeyWord));
     }
 
     @PostMapping
     public ResponseEntity<String> postPosition(@RequestBody Request request){
-        Position position = Position.builder()
-                .description(request.getDescription())
-                .location(request.getLocation())
-                .build();
+        if(authService.checkUUID(request.getUUID())) {
+            Position position = Position.builder()
+                    .description(request.getDescription())
+                    .location(request.getLocation())
+                    .build();
             Position createdPosition = repository.save(position);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(createdPosition).toUri();
-            return ResponseEntity.ok(location.toString());
-
+            return ResponseEntity.ok(urlService.createUrlWithId(createdPosition));
+        }
+        else return ResponseEntity.ofNullable("UUID is not good");
     }
 }
