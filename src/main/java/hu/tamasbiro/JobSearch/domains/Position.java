@@ -12,7 +12,7 @@ import lombok.Data;
 @Builder
 public class Position {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
     private String location;

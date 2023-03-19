@@ -1,6 +1,7 @@
 package hu.tamasbiro.JobSearch.controllers;
 
 import hu.tamasbiro.JobSearch.domains.Position;
+import hu.tamasbiro.JobSearch.domains.Request;
 import hu.tamasbiro.JobSearch.repository.PositionRepository;
 import hu.tamasbiro.JobSearch.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,13 @@ public class PositionController {
     }
 
     @PostMapping
-    public ResponseEntity<String> postPosition(@RequestBody Position position){
+    public ResponseEntity<String> postPosition(@RequestBody Request request){
+        Position position = Position.builder()
+                .description(request.getDescription())
+                .location(request.getLocation())
+                .build();
             Position createdPosition = repository.save(position);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}") //toDo: look after is id needed?
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                     .buildAndExpand(createdPosition).toUri();
             return ResponseEntity.ok(location.toString());
 
