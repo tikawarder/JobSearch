@@ -10,7 +10,17 @@ import lombok.Data;
 @Builder
 public class Client {
     @Id
-    private String id;
+    private String uuid;
     private String name;
     private String email;
+
+    public Client(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public Client(String uuid, String name, String email) {
+        this.uuid = uuid;
+        this.name = name;
+        this.email = email;
+    }
 }

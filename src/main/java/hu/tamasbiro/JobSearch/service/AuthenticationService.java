@@ -6,26 +6,24 @@ import java.util.UUID;
 
 @Service
 public class AuthenticationService {
-    private Client loggedInClient;
-    private String uuid = "empty";
-
+    public static final String EMPTY_UUID = "empty_uuid";
+    private Client loggedInClient = new Client(EMPTY_UUID);
     public Client getLoggedInClient() {
         return loggedInClient;
     }
 
-    public boolean checkUUID(String uuid){
-        return this.uuid.equals(uuid);
+    public boolean isUUIDIncorrect(String uuid){
+        return !this.loggedInClient.getUuid().equals(uuid);
     }
 
     public String login(String username, String email) {
         String uuid = UUID.randomUUID().toString();
         this.loggedInClient = Client
                 .builder()
-                .id(uuid)
+                .uuid(uuid)
                 .name(username)
                 .email(email)
                 .build();
-        this.uuid = uuid;
         return uuid;
     }
 }

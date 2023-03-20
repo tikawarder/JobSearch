@@ -10,8 +10,4 @@ import java.util.List;
 public interface PositionRepository extends JpaRepository<Position, Long> {
     List<Position> findByDescriptionContaining(String description);
     List<Position> findByLocationContaining(String location);
-    List<Position> findByDescriptionAndLocationContaining(String description, String location);
-
-//    @Query("SELECT u FROM Position u WHERE u.Decription LIKE u and u.Location LIKE u")
-//    List<Position> findByDescriptionAndLoacation (String description, String Location);
 }
