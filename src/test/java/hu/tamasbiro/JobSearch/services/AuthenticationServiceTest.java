@@ -1,7 +1,7 @@
 package hu.tamasbiro.JobSearch.services;
 
 import hu.tamasbiro.JobSearch.domains.Client;
-import hu.tamasbiro.JobSearch.repository.ClientRepository;
+import hu.tamasbiro.JobSearch.repositories.ClientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,15 +14,15 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AuthenticationServiceTest {
-    public static final String TEST_UUID = "test_UUID";
-    public static final String SAME_UUID = "test_UUID";
-    public static final String DIFFERENT_UUID = "different_UUID";
-    public static final String NAME = "Janos";
-    public static final String EMAIL = "valami@barmi.hu";
+    private static final String TEST_UUID = "test_UUID";
+    private static final String SAME_UUID = "test_UUID";
+    private static final String DIFFERENT_UUID = "different_UUID";
+    private static final String NAME = "Janos";
+    private static final String EMAIL = "valami@barmi.hu";
     @Mock
-    ClientRepository repository;
+    private ClientRepository repository;
     @InjectMocks
-    AuthenticationService underTest;
+    private AuthenticationService underTest;
 
     @BeforeEach
     void setUp(){

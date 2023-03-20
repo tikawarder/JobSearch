@@ -1,4 +1,4 @@
-package hu.tamasbiro.JobSearch.repository;
+package hu.tamasbiro.JobSearch.repositories;
 
 import hu.tamasbiro.JobSearch.domains.Position;
 import org.springframework.data.jpa.repository.JpaRepository;

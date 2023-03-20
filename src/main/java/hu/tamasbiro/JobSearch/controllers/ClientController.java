@@ -15,7 +15,7 @@ public class ClientController {
     public static final String ERROR_MESSAGE = "Name field must be between 1-100 chars, email should be valid " +
             "address.";
     @Autowired
-    AuthenticationService service;
+    private AuthenticationService service;
 
     @PostMapping
     public ResponseEntity<String> postClient(@Valid @RequestBody Client client){

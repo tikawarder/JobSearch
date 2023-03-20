@@ -1,7 +1,7 @@
 package hu.tamasbiro.JobSearch.services;
 
 import hu.tamasbiro.JobSearch.domains.Client;
-import hu.tamasbiro.JobSearch.repository.ClientRepository;
+import hu.tamasbiro.JobSearch.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class AuthenticationService {
     }
 
     @Autowired
-    ClientRepository repository;
+    private ClientRepository repository;
 
     public boolean isUUIDIncorrect(String uuid){
         return loggedInClient == null || !this.loggedInClient.getUuid().equals(uuid);

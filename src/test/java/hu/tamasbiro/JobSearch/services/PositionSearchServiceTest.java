@@ -1,7 +1,7 @@
 package hu.tamasbiro.JobSearch.services;
 
 import hu.tamasbiro.JobSearch.domains.Position;
-import hu.tamasbiro.JobSearch.repository.PositionRepository;
+import hu.tamasbiro.JobSearch.repositories.PositionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,12 +16,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PositionSearchServiceTest {
-    public static final String DESCRIPTION = "Developer";
-    public static final String LOCATION = "New York";
+    private static final String DESCRIPTION = "Developer";
+    private static final String LOCATION = "New York";
     @Mock
-    PositionRepository repository;
+    private PositionRepository repository;
     @InjectMocks
-    PositionSearchService underTest;
+    private PositionSearchService underTest;
     @BeforeEach
     void setUp(){
         MockitoAnnotations.openMocks(this);
@@ -52,14 +52,14 @@ public class PositionSearchServiceTest {
                 .location(LOCATION)
                 .build();
         Position position2 = Position.builder()
-                .description("Python Developer")
+                .description(DESCRIPTION)
                 .build();
         return new ArrayList<>(Arrays.asList(position1, position2));
     }
 
     private List<Position> fillLocationSearch(){
         Position position1 = Position.builder()
-                .location("New York")
+                .location(LOCATION)
                 .build();
         Position position2 = Position.builder()
                 .description(DESCRIPTION)

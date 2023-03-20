@@ -8,7 +8,7 @@ import java.net.URI;
 
 @Service
 public class UrlService {
-    public static final String PATH = "/{id}";
+    private static final String PATH = "/{id}";
 
     public String createUrlWithId(Position createdPosition){
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path(PATH)
