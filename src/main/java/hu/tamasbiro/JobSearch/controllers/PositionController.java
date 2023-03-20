@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @Validated
 public class PositionController {
     public static final String ERROR_MESSAGE = "Description and Locations fields must be between 1-50 chars.";
+    public static final String NOT_CORRECT_UUID = "not correct UUID";
     @Autowired
     PositionRepository repository;
     @Autowired
@@ -36,7 +37,7 @@ public class PositionController {
     @PostMapping
     public ResponseEntity<String> postPosition(@Valid @RequestBody Position request,
                                                @RequestHeader("uuid") String uuid){
-        if(authService.isUUIDIncorrect(uuid)) throw new AuthenticationException("not correct UUID");
+        if(authService.isUUIDIncorrect(uuid)) throw new AuthenticationException(NOT_CORRECT_UUID);
         Position position = Position.builder()
                 .description(request.getDescription())
                 .location(request.getLocation())
@@ -54,7 +55,7 @@ public class PositionController {
     public ResponseEntity<List<String>> getURLsBySearch(@RequestParam @Size(min=1, max=50) String positionKeyWord,
                                                         @RequestParam @Size(min=1, max=50) String locationKeyWord,
                                                         @RequestHeader("uuid") String uuid){
-        if(authService.isUUIDIncorrect(uuid)) throw new AuthenticationException("not correct UUID");
+        if(authService.isUUIDIncorrect(uuid)) throw new AuthenticationException(NOT_CORRECT_UUID);
         List<Position> searchedPositions = searchService.searchPositions(positionKeyWord, locationKeyWord);
         return ResponseEntity.ok(searchedPositions.stream()
                 .map(position -> urlService.createUrlWithId(position))

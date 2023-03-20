@@ -16,9 +16,10 @@ public class ClientController {
             "address.";
     @Autowired
     AuthenticationService service;
+
     @PostMapping
     public ResponseEntity<String> postClient(@Valid @RequestBody Client client){
-        String uuid = service.login(client.getName(), client.getEmail());
+        String uuid = service.login(client);
         return ResponseEntity.ok(uuid);
     }
 
