@@ -19,10 +19,6 @@ public class Client {
     @Email
     private String email;
 
-    public Client(String uuid) {
-        this.uuid = uuid;
-    }
-
     public Client(String uuid, String name, String email) {
         this.uuid = uuid;
         this.name = name;

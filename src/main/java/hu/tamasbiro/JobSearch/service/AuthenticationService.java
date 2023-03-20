@@ -10,8 +10,7 @@ import java.util.UUID;
 
 @Service
 public class AuthenticationService {
-    public static final String EMPTY_UUID = "empty_uuid";
-    private Client loggedInClient = new Client(EMPTY_UUID);
+    private Client loggedInClient;
     public Client getLoggedInClient() {
         return loggedInClient;
     }
@@ -19,7 +18,7 @@ public class AuthenticationService {
     ClientRepository repository;
 
     public boolean isUUIDIncorrect(String uuid){
-        return !this.loggedInClient.getUuid().equals(uuid);
+        return loggedInClient == null || !this.loggedInClient.getUuid().equals(uuid);
     }
 
     public String login(Client client) {
