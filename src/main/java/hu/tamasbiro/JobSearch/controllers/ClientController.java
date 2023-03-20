@@ -1,7 +1,7 @@
 package hu.tamasbiro.JobSearch.controllers;
 
 import hu.tamasbiro.JobSearch.domains.Client;
-import hu.tamasbiro.JobSearch.service.AuthenticationService;
+import hu.tamasbiro.JobSearch.services.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

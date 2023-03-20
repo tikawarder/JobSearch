@@ -1,4 +1,4 @@
-package hu.tamasbiro.JobSearch.service;
+package hu.tamasbiro.JobSearch.services;
 
 import hu.tamasbiro.JobSearch.domains.Client;
 import hu.tamasbiro.JobSearch.repository.ClientRepository;
@@ -14,6 +14,11 @@ public class AuthenticationService {
     public Client getLoggedInClient() {
         return loggedInClient;
     }
+
+    public void setLoggedInClient(Client loggedInClient) {
+        this.loggedInClient = loggedInClient;
+    }
+
     @Autowired
     ClientRepository repository;
 

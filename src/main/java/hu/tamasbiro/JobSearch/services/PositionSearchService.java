@@ -1,4 +1,4 @@
-package hu.tamasbiro.JobSearch.service;
+package hu.tamasbiro.JobSearch.services;
 
 import hu.tamasbiro.JobSearch.domains.Position;
 import hu.tamasbiro.JobSearch.repository.PositionRepository;
